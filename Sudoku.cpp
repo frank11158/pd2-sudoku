@@ -39,7 +39,7 @@ void Sudoku::readIn()
 //solve & output
 void Sudoku::solve()
 {
-	int i, j, temp2[9][9];
+	int i, j;
 	bool k;
 	if(find_solution1(0, 0)){
 		for(i=0; i<9; i++){
@@ -48,7 +48,7 @@ void Sudoku::solve()
 				ans[i][j]=temp[i][j];
 			}
 		}	
-		find_solution2(0,0);
+		find_solution2(0, 0);
 		for(i=0; i<9; i++){
 			for(j=0; j<9; j++){
 				if(temp2[i][j] == ans[i][j]){
@@ -94,11 +94,11 @@ bool Sudoku::find_solution2(int s, int t)
 {
 	if(s == 9)return true;
 	else{
-		if(fixed[s][t])next_position2(s, t);
+		if(fixed[s][t])next_position1(s, t);
 
 		int i=s, j=t;
 
-		next_position2(i, j);
+		next_position1(i, j);
 
 		int N;
 		for(N=9; N>0; N--){
@@ -135,19 +135,6 @@ bool Sudoku::valid_number(int N, int i, int j)const
 
 //find next position (i,j)
 void Sudoku::next_position1(int& i, int& j)const
-{
-	if(i == 9)return;
-	do{
-		j++;
-		if(j == 9){
-			i++;
-			j=0;
-		}
-		if(i == 9)return;
-	}while(fixed[i][j]);
-}
-
-void  Sudoku::next_position2(int& i, int& j)const
 {
 	if(i == 9)return;
 	do{
